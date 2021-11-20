@@ -25,7 +25,7 @@ BR_PER_EPOCH = 4 # applies for pre-Altair base reward calc
 H_WEIGHT = 14
 S_WEIGHT = 14
 T_WEIGHT = 26
-S_WEIGHT = 2
+SY_WEIGHT = 2
 PROPOSER_WEIGHT = 8
 WEIGHT_DENOMINATOR = 64
 ALTAIR_PROPOSER_REWARD_FACTOR = 4
@@ -55,7 +55,7 @@ for e in range(NUM_EPOCHS):
     active_balance = cursor.fetchone()[0]
     alt_br = EFFECTIVE_BALANCE * BR_FACTOR // math.isqrt(active_balance)
     total_br = active_balance * BR_FACTOR // math.isqrt(active_balance)
-    per_epoch_sync_reward = total_br * S_WEIGHT // WEIGHT_DENOMINATOR // COMMITTEE_VALIDATORS
+    per_epoch_sync_reward = total_br * SY_WEIGHT // WEIGHT_DENOMINATOR // COMMITTEE_VALIDATORS
     old_br = alt_br // BR_PER_EPOCH
     cursor.execute(
         f"SELECT * FROM t_validator_epoch_summaries WHERE f_epoch = {e}"
